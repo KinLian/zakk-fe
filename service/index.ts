@@ -1,3 +1,3 @@
-import {signup} from "./endpoint"
+import { signup } from "./endpoint"
 
-export {  }
+export { signup }

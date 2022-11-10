@@ -1,10 +1,11 @@
-const url: string = process.env.URL || "localhost:4000/api"
+const url: string = process.env.URL || "http://localhost:4000/api"
 
 const getAPI = (baseURL: string) =>
     (endpoint: string) =>
         async (callback: any, detail = "", setting?: object) => {
+            const fullURL = new URL(`${baseURL}/${endpoint}/${detail}`)
             try {
-                const response = await fetch(`${baseURL}/${endpoint}/${detail}`, setting)
+                const response = await fetch(fullURL, setting)
                 const json = await response.json()
                 return callback(json)
             }
@@ -16,20 +17,10 @@ const getAPI = (baseURL: string) =>
 const baseURLAPI = getAPI(url)
 const fetchUsers = baseURLAPI("users")
 
-interface LoginData {
-    email: string,
-    password: string
-}
-
-interface SignUpData extends LoginData {
-    username: string,
-    name : string
-}
-
-export const signup = (data: SignUpData, callback: any) =>
-    fetchUsers(callback, "signup",
+export const signup = (data: object, callback: any) =>
+    fetchUsers(callback, "register",
         {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         })
