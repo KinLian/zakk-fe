@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import Input from "../Input/Input";
 import { signup } from "../../service";
 import { handleResponse,compose } from "utils";
+import tw from 'twin.macro'
+
 
 const SignUpForm : FC = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit = async (data:object) => await signup(data,compose(alert,handleResponse))
 
-    return <form onSubmit={handleSubmit(onSubmit)}>
+    return <form onSubmit={handleSubmit(onSubmit)} tw='w-full flex-col flex items-center'>
         <Input label="Email" 
                 id="email" 
                 type="email"
