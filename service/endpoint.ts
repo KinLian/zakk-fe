@@ -21,6 +21,14 @@ export const signup = (data: object, callback: any) =>
     fetchUsers(callback, "register",
         {
             method: "POST",
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+
+export const login = (data: object, callback: any) =>
+    fetchUsers(callback, "login",
+        {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })

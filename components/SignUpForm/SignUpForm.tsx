@@ -2,11 +2,11 @@ import { FC } from "react"
 import { useForm } from "react-hook-form";
 import Input from "../Input/Input";
 import { signup } from "../../service";
-import { signUpAlert } from "./helpers";
+import { handleResponse,compose } from "utils";
 
 const SignUpForm : FC = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const onSubmit = async (data:object) => await signup(data,signUpAlert)
+    const onSubmit = async (data:object) => await signup(data,compose(alert,handleResponse))
 
     return <form onSubmit={handleSubmit(onSubmit)}>
         <Input label="Email" 
