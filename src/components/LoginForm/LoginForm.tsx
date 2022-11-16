@@ -1,7 +1,7 @@
-import Input from "components/Input/Input";
+import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
-import { login } from "service/endpoint";
-import {compose,handleResponse} from "utils"
+import { login } from "@/service/endpoint";
+import { compose,handleResponse } from "@/utils";
 import tw from 'twin.macro'
 
 const LoginForm = () => {

@@ -2,7 +2,7 @@ import { FC } from "react"
 import { useForm } from "react-hook-form";
 import Input from "../Input/Input";
 import { signup } from "../../service";
-import { handleResponse,compose } from "utils";
+import { handleResponse,compose } from "@/utils";
 import tw from 'twin.macro'
 
 

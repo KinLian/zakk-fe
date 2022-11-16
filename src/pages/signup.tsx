@@ -1,4 +1,4 @@
-import { SignUpForm } from "components/SignUpForm";
+import { SignUpForm } from "@/components/SignUpForm";
 import { NextPage } from "next";
 import tw from 'twin.macro';
 import Link from 'next/link'
