@@ -1,34 +1,24 @@
+import axios from "axios"
+
 const url: string = process.env.URL || "http://localhost:4000/api"
 
-const getAPI = (baseURL: string) =>
-    (endpoint: string) =>
-        async (callback: any, detail = "", setting?: object) => {
-            const fullURL = new URL(`${baseURL}/${endpoint}/${detail}`)
-            try {
-                const response = await fetch(fullURL, setting)
-                const json = await response.json()
-                return callback(json)
-            }
-            catch (error) {
-                return callback(error)
-            }
-        }
+const baseAxios = axios.create({ baseURL: url })
 
-const baseURLAPI = getAPI(url)
-const fetchUsers = baseURLAPI("users")
+baseAxios.interceptors.response.use((response) => {
+    // Do something with response data
+    return response.status == 200 ? response['data'] : response
+}, (error) => {
+    // Do something with response error
+    return Promise.reject(error);
+});
 
-export const signup = (data: object, callback: any) =>
-    fetchUsers(callback, "register",
-        {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
+baseAxios.interceptors.request.use((request) => {
+    // todo: each request, put bearer if there is a token
+    return request
+}, (error) => {
+    return Promise.reject(error);
+})
 
-export const login = (data: object, callback: any) =>
-    fetchUsers(callback, "login",
-        {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
+export const signup = (data: object) => baseAxios.post("users/register", data)
+export const login = (data: object) => baseAxios.post("users/login", data)
+
