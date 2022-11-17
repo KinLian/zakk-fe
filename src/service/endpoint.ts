@@ -1,24 +1,24 @@
 import axios from "axios"
+import { getToken } from "./token"
 
 const url: string = process.env.URL || "http://localhost:4000/api"
 
 const baseAxios = axios.create({ baseURL: url })
 
-baseAxios.interceptors.response.use((response) => {
-    // Do something with response data
-    return response.status == 200 ? response['data'] : response
-}, (error) => {
-    // Do something with response error
-    return Promise.reject(error);
-});
-
-baseAxios.interceptors.request.use((request) => {
-    // todo: each request, put bearer if there is a token
-    return request
+baseAxios.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+        config.headers = {
+            ...config.headers,
+            authorization: `Bearer ${getToken()}`
+        }
+    }
+    return config
 }, (error) => {
     return Promise.reject(error);
 })
 
-export const signup = (data: object) => baseAxios.post("users/register", data)
-export const login = (data: object) => baseAxios.post("users/login", data)
 
+export const signup = (data: object) => baseAxios.post("users/register", data)
+export const fetchToken = (data: object) => baseAxios.post("users/login", data)
+export const getUser = () => baseAxios.get("users")

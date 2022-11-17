@@ -1,13 +1,18 @@
 import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
-import { login } from "@/service/endpoint";
+import { login } from "@/service";
 import tw from 'twin.macro'
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
+
+    const router = useRouter();
+
     const onSubmit = async (data:object) => {
-        const token = await login(data)
-        console.log(token);
+        const isLoggedIn = await login(data)
+        isLoggedIn ? router.replace("/") : null;
     }
+    
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     return <form onSubmit={handleSubmit(onSubmit)} tw='w-full flex-col flex items-center'>
