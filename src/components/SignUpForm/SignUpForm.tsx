@@ -8,8 +8,7 @@ import tw from 'twin.macro'
 const SignUpForm : FC = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit = async (data:object) => {
-        const message = await signup(data)
-        alert(message)
+        await signup(data)
     }
 
     return <form onSubmit={handleSubmit(onSubmit)} tw='w-full flex-col flex items-center'>

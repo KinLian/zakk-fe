@@ -1,9 +1,8 @@
 import axios from "axios"
 import { getToken } from "./token"
+import { config } from "@/config"
 
-const url: string = process.env.URL || "http://localhost:4000/api"
-
-const baseAxios = axios.create({ baseURL: url })
+const baseAxios = axios.create(config.development)
 
 baseAxios.interceptors.request.use((config) => {
     const token = getToken();
@@ -19,6 +18,6 @@ baseAxios.interceptors.request.use((config) => {
 })
 
 
-export const signup = (data: object) => baseAxios.post("users/register", data)
+export const signUpAPI = (data: object) => baseAxios.post("users/register", data)
 export const fetchToken = (data: object) => baseAxios.post("users/login", data)
 export const getUser = () => baseAxios.get("users")
