@@ -21,7 +21,9 @@ export const Navbar = () => {
     <div tw="top-0 p-5 flex justify-between ">
       <h1 css={[tw`text-center text-white font-bold text-3xl`]}>Forum</h1>
       <div>
-        <button tw="px-5" onClick={onClickLoggedIn}>{isLoggedIn ? "Logout" : "Login"}</button>
+        <button tw="px-5" onClick={onClickLoggedIn}>
+          {isLoggedIn ? "Logout" : "Login"}
+        </button>
         {!isLoggedIn && <button onClick={onClickSignUp}>Sign Up</button>}
       </div>
     </div>
