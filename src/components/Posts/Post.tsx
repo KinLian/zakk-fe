@@ -1,4 +1,7 @@
 import tw from "twin.macro";
+import { Button } from "../Button";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
 
 interface PostProps {
   like: number;
@@ -20,19 +23,19 @@ export const Post: React.FC<PostProps> = ({
   comments,
 }) => {
   return (
-    <div tw="p-3 flex bg-[#181a1b] w-9/12">
-      <div tw="px-2">
-        <button>like</button>
+    <div tw="py-5 my-3 px-3 flex bg-[#181a1b] w-9/12">
+      <div tw="px-3 flex flex-col items-center">
+        <Button icon={<AiOutlineArrowUp />} />
         <p>{like - dislike}</p>
-        <button>dislike</button>
+        <Button icon={<AiOutlineArrowDown />} />
       </div>
       <div>
         <p tw="font-light text-sm">
           Posted by {poster}, {postDate} hours ago
         </p>
         <p tw="py-2 font-medium text-2xl">{title}</p>
-        <p tw='py-1'>{content}</p>
-        <button>{comments} comments</button>
+        <p tw="py-1">{content}</p>
+        <Button icon={<BiCommentDetail />}>{comments} Comments</Button>
       </div>
     </div>
   );

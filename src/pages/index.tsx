@@ -19,7 +19,11 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <main tw="px-5 h-screen flex flex-col justify-center items-center">
+      <main tw="px-5 flex flex-col justify-center items-center">
+        <Post {...dummyPost} />
+        <Post {...dummyPost} />
+        <Post {...dummyPost} />
+        <Post {...dummyPost} />
         <Post {...dummyPost} />
       </main>
     </Layout>
