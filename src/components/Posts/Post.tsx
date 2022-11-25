@@ -1,7 +1,14 @@
-import tw from "twin.macro";
 import { Button } from "../Button";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
+import { useState } from "react";
+import {
+  Container,
+  ContentContainer,
+  CreatedText,
+  LikeContainer,
+  Title,
+} from "./style";
 
 interface PostProps {
   like: number;
@@ -22,21 +29,34 @@ export const Post: React.FC<PostProps> = ({
   postDate,
   comments,
 }) => {
+  const [likeState, setLike] = useState(like);
+  const [dislikeState, setDislike] = useState(dislike);
+
+  const onLikeClick = (e: Event) => {
+    e.stopPropagation();
+    setLike(likeState + 1);
+  };
+
+  const onDislikeClick = (e: Event) => {
+    e.stopPropagation();
+    setDislike(dislikeState + 1);
+  };
+
   return (
-    <div tw="py-5 my-3 px-3 flex bg-[#181a1b] w-9/12">
-      <div tw="px-3 flex flex-col items-center">
-        <Button icon={<AiOutlineArrowUp />} />
-        <p>{like - dislike}</p>
-        <Button icon={<AiOutlineArrowDown />} />
-      </div>
-      <div>
-        <p tw="font-light text-sm">
+    <Container>
+      <LikeContainer>
+        <Button onClick={onLikeClick} icon={<AiOutlineArrowUp />} />
+        <p>{likeState - dislikeState}</p>
+        <Button onClick={onDislikeClick} icon={<AiOutlineArrowDown />} />
+      </LikeContainer>
+      <ContentContainer>
+        <CreatedText>
           Posted by {poster}, {postDate} hours ago
-        </p>
-        <p tw="py-2 font-medium text-2xl">{title}</p>
-        <p tw="py-1">{content}</p>
+        </CreatedText>
+        <Title>{title}</Title>
+        <p>{content}</p>
         <Button icon={<BiCommentDetail />}>{comments} Comments</Button>
-      </div>
-    </div>
+      </ContentContainer>
+    </Container>
   );
 };

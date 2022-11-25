@@ -2,6 +2,7 @@ import { getToken } from "@/service";
 import { useEffect, useState } from "react";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
+import { Button } from "../Button";
 
 export const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,11 +21,15 @@ export const Navbar = () => {
   return (
     <div tw="top-0 p-5 flex justify-between ">
       <h1 css={[tw`text-center text-white font-bold text-3xl`]}>Forum</h1>
-      <div>
-        <button tw="px-5" onClick={onClickLoggedIn}>
+      <div tw="flex gap-3">
+        <Button color="black" backgroundColor="white" onClick={onClickLoggedIn}>
           {isLoggedIn ? "Logout" : "Login"}
-        </button>
-        {!isLoggedIn && <button onClick={onClickSignUp}>Sign Up</button>}
+        </Button>
+        {!isLoggedIn && (
+          <Button color="black" backgroundColor="white" onClick={onClickSignUp}>
+            Sign Up
+          </Button>
+        )}
       </div>
     </div>
   );
