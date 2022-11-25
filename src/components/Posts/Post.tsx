@@ -45,9 +45,17 @@ export const Post: React.FC<PostProps> = ({
   return (
     <Container>
       <LikeContainer>
-        <Button onClick={onLikeClick} icon={<AiOutlineArrowUp />} />
+        <Button
+          hoverColor="#68B984"
+          onClick={onLikeClick}
+          icon={<AiOutlineArrowUp />}
+        />
         <p>{likeState - dislikeState}</p>
-        <Button onClick={onDislikeClick} icon={<AiOutlineArrowDown />} />
+        <Button
+          hoverColor="#DC3535"
+          onClick={onDislikeClick}
+          icon={<AiOutlineArrowDown />}
+        />
       </LikeContainer>
       <ContentContainer>
         <CreatedText>

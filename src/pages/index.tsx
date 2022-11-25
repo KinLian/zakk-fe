@@ -1,32 +1,27 @@
-import { Layout } from "@/components/Layout";
-import { Post } from "@/components/Posts";
 import type { NextPage } from "next";
 import { useState } from "react";
 import tw from "twin.macro";
-
-const dummyPost = {
-  like: 1000,
-  poster: "JohnDoe",
-  dislike: 0,
-  title: "Who is John Doe?",
-  content: "John Doe is a person who likes to eat",
-  postDate: "7",
-  comments: 100,
-};
 
 const Home: NextPage = () => {
   const [hide, setHide] = useState(false);
 
   return (
-    <Layout>
-      <main tw="px-5 flex flex-col justify-center items-center">
-        <Post {...dummyPost} />
-        <Post {...dummyPost} />
-        <Post {...dummyPost} />
-        <Post {...dummyPost} />
-        <Post {...dummyPost} />
-      </main>
-    </Layout>
+    <main tw="bg-[#121212] w-full h-screen flex flex-col justify-center items-center">
+      <h1
+        css={[
+          tw`text-center text-white font-bold text-5xl`,
+          hide && tw`hidden`,
+        ]}
+      >
+        Hello ZAKK!!
+      </h1>
+      <button
+        tw="bg-white rounded-md p-3 font-bold mt-8 text-black"
+        onClick={() => setHide((prev) => !prev)}
+      >
+        {hide ? "Show" : "Hide"} Text
+      </button>
+    </main>
   );
 };
 

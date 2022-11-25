@@ -8,7 +8,7 @@ interface ButtonProps {
   onClick?: (...x: any[]) => any;
   hoverColor?: string;
   backgroundColor?: string;
-  color?: string;
+  color?: string | undefined;
 }
 
 const Button: FC<ButtonProps> = ({ className, icon, children, onClick }) => {
@@ -33,7 +33,7 @@ const StyledButton = styled(Button)`
   color: ${(props) => props.color || "inherit"};
 
   &:hover {
-    color: ${(props) => props.hoverColor || "palevioletred"};
+    color: ${(props) => props.hoverColor || ""};
   }
 `;
 

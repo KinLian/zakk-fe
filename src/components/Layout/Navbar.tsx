@@ -21,16 +21,26 @@ export const Navbar = () => {
   return (
     <div tw="top-0 p-5 flex justify-between ">
       <h1 css={[tw`text-center text-white font-bold text-3xl`]}>Forum</h1>
-      <div tw="flex gap-3">
-        <Button color="black" backgroundColor="white" onClick={onClickLoggedIn}>
-          {isLoggedIn ? "Logout" : "Login"}
-        </Button>
-        {!isLoggedIn && (
-          <Button color="black" backgroundColor="white" onClick={onClickSignUp}>
-            Sign Up
+      {router.asPath !== "/login" && router.asPath !== "/signup" && (
+        <div tw="flex gap-3">
+          <Button
+            color="white"
+            backgroundColor="#863A6F"
+            onClick={onClickLoggedIn}
+          >
+            {isLoggedIn ? "Logout" : "Login"}
           </Button>
-        )}
-      </div>
+          {!isLoggedIn && (
+            <Button
+              color="black"
+              backgroundColor="white"
+              onClick={onClickSignUp}
+            >
+              Sign Up
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
