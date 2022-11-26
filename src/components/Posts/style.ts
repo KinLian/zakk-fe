@@ -4,7 +4,7 @@ import tw, { styled } from "twin.macro";
 export const Container = styled.div`
   ${tw`
     cursor-pointer 
-    py-3
+    py-5 
     my-3
     px-3
     flex

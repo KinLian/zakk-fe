@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "like": 1000,
+    "poster": "JohnDoe",
+    "dislike": 0,
+    "title": "Who is John Doe?",
+    "content": "John Doe is a person who likes to eat",
+    "postDate": "7",
+    "comments": 100
+  },
+  {
+    "id": 2,
+    "like": 1200,
+    "poster": "JohnDoe",
+    "dislike": 0,
+    "title": "Who is John Doe?",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae vestibulum quam. Nam non lectus pretium lorem suscipit interdum at id erat. Cras dignissim nisl eu dolor placerat interdum. Quisque vitae orci fringilla, iaculis neque vel, condimentum magna. Maecenas placerat tempus massa, quis sagittis lectus dignissim vel.",
+    "postDate": "7",
+    "comments": 100
+  },
+  {
+    "id": 3,
+    "like": 500,
+    "poster": "JohnDoe",
+    "dislike": 0,
+    "title": "Who is John Doe?",
+    "content": "Aenean nec dignissim enim. Ut pretium luctus tincidunt. Nullam tincidunt mi diam, et auctor diam molestie et. Vivamus nec sodales elit. Duis blandit tempor sapien suscipit ornare.",
+    "postDate": "7",
+    "comments": 100
+  },
+  {
+    "id": 4,
+    "like": 600,
+    "poster": "JohnDoe",
+    "dislike": 0,
+    "title": "Who is John Doe?",
+    "content": "Vestibulum et viverra nibh, sed finibus odio. In sagittis eget ex vitae ultrices. Nunc lobortis orci at nulla rhoncus dignissim. Phasellus a sodales velit.",
+    "postDate": "7",
+    "comments": 100
+  }
+]
