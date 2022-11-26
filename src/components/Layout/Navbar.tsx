@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
 import { Button } from "../Button";
+import { GrAdd } from "react-icons/gr";
 
 export const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,6 +14,8 @@ export const Navbar = () => {
   };
 
   const onClickSignUp = () => router.push("/signup");
+  const onHeaderClicked = () => router.push("/posts");
+  const onAddPostClicked = () => router.push("/posts/create");
 
   useEffect(() => {
     getToken() && setIsLoggedIn(true);
@@ -20,7 +23,12 @@ export const Navbar = () => {
 
   return (
     <div tw="top-0 p-5 flex justify-between ">
-      <h1 css={[tw`text-center text-white font-bold text-3xl`]}>Forum</h1>
+      <h1
+        onClick={onHeaderClicked}
+        css={[tw`text-center text-white font-bold text-3xl cursor-pointer`]}
+      >
+        Forum
+      </h1>
       {router.asPath !== "/login" && router.asPath !== "/signup" && (
         <div tw="flex gap-3">
           <Button
@@ -29,6 +37,14 @@ export const Navbar = () => {
             onClick={onClickLoggedIn}
           >
             {isLoggedIn ? "Logout" : "Login"}
+          </Button>
+          <Button
+            onClick={onAddPostClicked}
+            tw="bg-white"
+            icon={<GrAdd />}
+            color="black"
+          >
+            Add Post
           </Button>
           {!isLoggedIn && (
             <Button

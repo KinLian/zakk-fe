@@ -25,7 +25,7 @@ const Input: FC<InputProps> = ({
       <label tw="block">{label}</label>
       {type === "textarea" ? (
         <textarea
-          tw="text-black bg-white my-1 py-2 h-[100px] px-6 w-full"
+          tw="text-black bg-white my-1 py-2 h-[200px] px-6 w-full"
           placeholder={placeholder}
           {...register(id, validation)}
         />
