@@ -26,7 +26,9 @@ const Posts: NextPage = () => {
           Your Posts
         </Button>
       </div>
-      {dummyPosts.map((post) => (
+      {dummyPosts.length === 0 ? <div tw='text-lg font-bold w-full flex items-center justify-center h-screen'>
+        There are no post yet, be the first!
+      </div>  :  dummyPosts.map((post) => (
         <Post key={post.id} {...post} />
       ))}
     </main>

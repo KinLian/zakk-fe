@@ -24,8 +24,8 @@ export const Navbar = () => {
       {router.asPath !== "/login" && router.asPath !== "/signup" && (
         <div tw="flex gap-3">
           <Button
-            color="white"
-            backgroundColor="#863A6F"
+            color="black"
+            backgroundColor="#FFADBC"
             onClick={onClickLoggedIn}
           >
             {isLoggedIn ? "Logout" : "Login"}
