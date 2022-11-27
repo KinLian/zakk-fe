@@ -1,4 +1,5 @@
 import { Form } from "@/components/Form";
+import { Container, H1 } from "@/styles/base";
 import { NextPage } from "next";
 import tw from "twin.macro";
 
@@ -23,10 +24,10 @@ const CreatePost: NextPage = () => {
   ];
 
   return (
-    <main tw="w-full items-center flex-col justify-center h-full flex gap-5">
-      <h1 tw="font-bold text-3xl">Create Post</h1>
+    <Container>
+      <H1>Create Post</H1>
       <Form submitText="Post" inputs={inputData} onSubmit={onSubmit} />
-    </main>
+    </Container>
   );
 };
 

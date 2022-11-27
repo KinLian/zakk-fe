@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import { useRouter } from "next/router";
 import { Button } from "../Button";
 import { GrAdd } from "react-icons/gr";
+import * as S from "./Navbar.style";
 
 export const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,15 +23,10 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div tw="top-0 p-5 flex justify-between ">
-      <h1
-        onClick={onHeaderClicked}
-        css={[tw`text-center text-white font-bold text-3xl cursor-pointer`]}
-      >
-        Forum
-      </h1>
+    <S.Container>
+      <S.Logo onClick={onHeaderClicked}>Forum</S.Logo>
       {router.asPath !== "/login" && router.asPath !== "/signup" && (
-        <div tw="flex gap-3">
+        <S.ButtonContainer>
           <Button
             color="black"
             backgroundColor="#FFADBC"
@@ -38,14 +34,16 @@ export const Navbar = () => {
           >
             {isLoggedIn ? "Logout" : "Login"}
           </Button>
-          <Button
-            onClick={onAddPostClicked}
-            tw="bg-white"
-            icon={<GrAdd />}
-            color="black"
-          >
-            Add Post
-          </Button>
+          {isLoggedIn && (
+            <Button
+              onClick={onAddPostClicked}
+              tw="bg-white"
+              icon={<GrAdd />}
+              color="black"
+            >
+              Add Post
+            </Button>
+          )}
           {!isLoggedIn && (
             <Button
               color="black"
@@ -55,8 +53,8 @@ export const Navbar = () => {
               Sign Up
             </Button>
           )}
-        </div>
+        </S.ButtonContainer>
       )}
-    </div>
+    </S.Container>
   );
 };

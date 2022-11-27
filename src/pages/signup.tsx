@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import Link from "next/link";
 import { signup } from "@/service";
 import { Form } from "@/components/Form";
+import { Container, H1 } from "@/styles/base";
 
 const SignUp: NextPage = () => {
   const onSubmit = async (data: object) => {
@@ -41,15 +42,13 @@ const SignUp: NextPage = () => {
   ];
 
   return (
-    <div tw="w-full gap-5 h-full flex flex-col justify-center items-center">
-      <h1 css={[tw`text-center text-white font-bold text-5xl`]}>
-        Sign Up
-      </h1>
+    <Container>
+      <H1>Sign Up</H1>
       <Form inputs={inputData} onSubmit={onSubmit} submitText={"Sign Up"} />
       <p tw="mt-5">
         {"Already have an account?"} <Link href={"/login"}>Login</Link>
       </p>
-    </div>
+    </Container>
   );
 };
 

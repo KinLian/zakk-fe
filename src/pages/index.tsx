@@ -1,3 +1,4 @@
+import { Container } from "@/styles/base";
 import type { NextPage } from "next";
 import { useState } from "react";
 import tw from "twin.macro";
@@ -6,7 +7,7 @@ const Home: NextPage = () => {
   const [hide, setHide] = useState(false);
 
   return (
-    <main tw="bg-[#121212] w-full h-screen flex flex-col justify-center items-center">
+    <Container>
       <h1
         css={[
           tw`text-center text-white font-bold text-5xl`,
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
       >
         {hide ? "Show" : "Hide"} Text
       </button>
-    </main>
+    </Container>
   );
 };
 

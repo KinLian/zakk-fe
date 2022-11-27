@@ -8,7 +8,7 @@ import {
   CreatedText,
   LikeContainer,
   Title,
-} from "./style";
+} from "./Post.style";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

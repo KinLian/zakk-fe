@@ -1,17 +1,19 @@
 import { Button } from "@/components/Button";
+import { EmptyContent } from "@/components/EmptyContent/EmptyContent";
 import { Post } from "@/components/Posts";
+import { Container } from "@/styles/base";
 import { NextPage } from "next";
-import Link from "next/link";
 import { useState } from "react";
 import tw from "twin.macro";
 import dummyPosts from "./dummy.json";
+import * as S from "./index.style";
 
 const Posts: NextPage = () => {
   const [active, setActive] = useState("Trending Posts");
 
   return (
-    <main tw="bg-[#121212] w-full flex flex-col justify-center items-center">
-      <div tw="font-medium mt-5 bg-[#181a1b] flex gap-3 p-3 w-9/12">
+    <Container tw="h-full">
+      <S.HeaderContainer>
         <Button
           onClick={() => setActive("Trending Posts")}
           color={active === "Trending Posts" ? "#FFADBC" : ""}
@@ -25,13 +27,13 @@ const Posts: NextPage = () => {
           {" "}
           Your Posts
         </Button>
-      </div>
-      {dummyPosts.length === 0 ? <div tw='text-lg font-bold w-full flex items-center justify-center h-screen'>
-        There are no post yet, be the first!
-      </div>  :  dummyPosts.map((post) => (
-        <Post key={post.id} {...post} />
-      ))}
-    </main>
+      </S.HeaderContainer>
+      {dummyPosts.length === 0 ? (
+        <EmptyContent content="post" />
+      ) : (
+        dummyPosts.map((post) => <Post key={post.id} {...post} />)
+      )}
+    </Container>
   );
 };
 

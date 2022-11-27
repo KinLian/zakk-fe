@@ -1,10 +1,12 @@
 import { FC } from "react";
 import dummyPosts from "./dummy.json";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { Post } from "@/components/Posts";
 import dummyComments from "./dummy_comments.json";
 import { Comment } from "@/components/Comment";
-import { CommentForm } from "@/components/Comment/CommentForm";
+import { Form } from "@/components/Form";
+import { Container } from "@/styles/base";
+import { EmptyContent } from "@/components/EmptyContent/EmptyContent";
 
 export async function getStaticPaths() {
   const paths = dummyPosts.map((post) => {
@@ -42,23 +44,51 @@ interface PostDetailsProps {
   comments: any;
 }
 
+const CommentContainer = styled.div`
+  ${tw`
+    bg-[#181a1b] 
+    flex 
+    flex-col 
+    items-start 
+    gap-4 
+    w-full md:w-9/12 
+    p-3
+  `}
+`;
+
 const PostDetail: FC<PostDetailsProps> = ({ post, comments }) => {
+  const onSubmit = (data: object) => console.log(data);
+  const inputData = [
+    {
+      label: "Comment as John Doe",
+      id: "comment",
+      type: "textarea",
+      placeholder: "Your Comments",
+      validation: { required: "Please fill the comment" },
+    },
+  ];
+
   return (
-    <main tw="bg-[#121212] w-full p-10 flex flex-col justify-center items-center">
+    <Container tw="h-full">
       <Post {...post[0]} />
       <>
-        <div tw="bg-[#181a1b] flex flex-col items-start gap-4 w-9/12 p-3">
-          <CommentForm />
+        <CommentContainer>
+          <Form
+            tw="w-full"
+            onSubmit={onSubmit}
+            inputs={inputData}
+            submitText={"Comment"}
+          />
           {comments.length === 0 ? (
-            <div tw="text-lg font-bold w-full flex items-center justify-center h-screen">
-              There are no comments yet, be the first!
-            </div>
+            <EmptyContent content="comment" />
           ) : (
-            comments.map((comment: any) => <Comment key={comment.id} {...comment} />)
+            comments.map((comment: any) => (
+              <Comment key={comment.id} {...comment} />
+            ))
           )}
-        </div>
+        </CommentContainer>
       </>
-    </main>
+    </Container>
   );
 };
 

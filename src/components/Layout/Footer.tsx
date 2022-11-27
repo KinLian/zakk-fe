@@ -1,7 +1,21 @@
-import tw from "twin.macro";
+import { FC } from "react";
+import tw, { styled } from "twin.macro";
 
-export const Footer = () => {
-  return (
-    <div tw="p-5 bottom-0 flex justify-center">@2022 Made by ZAKK team 😊</div>
-  );
+interface FooterProps {
+  className?: string;
+}
+
+const Footer: FC<FooterProps> = ({ className }) => {
+  return <div className={className}>@2022 Made by ZAKK team 😊</div>;
 };
+
+const StyledFooter = styled(Footer)`
+  ${tw`
+    p-5 
+    bottom-0 
+    flex 
+    justify-center
+  `}
+`;
+
+export { StyledFooter as Footer };
