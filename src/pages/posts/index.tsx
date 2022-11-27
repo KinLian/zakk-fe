@@ -8,11 +8,12 @@ import tw from "twin.macro";
 import dummyPosts from "./dummy.json";
 import * as S from "./index.style";
 
+
 const Posts: NextPage = () => {
   const [active, setActive] = useState("Trending Posts");
 
   return (
-    <Container tw="h-full">
+     <Container tw="h-full">
       <S.HeaderContainer>
         <Button
           onClick={() => setActive("Trending Posts")}

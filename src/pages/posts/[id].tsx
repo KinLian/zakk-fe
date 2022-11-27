@@ -8,6 +8,7 @@ import { Form } from "@/components/Form";
 import { Container } from "@/styles/base";
 import { EmptyContent } from "@/components/EmptyContent/EmptyContent";
 
+
 export async function getStaticPaths() {
   const paths = dummyPosts.map((post) => {
     return {
@@ -58,6 +59,9 @@ const CommentContainer = styled.div`
 
 const PostDetail: FC<PostDetailsProps> = ({ post, comments }) => {
   const onSubmit = (data: object) => console.log(data);
+
+
+
   const inputData = [
     {
       label: "Comment as John Doe",

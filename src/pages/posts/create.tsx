@@ -5,7 +5,6 @@ import tw from "twin.macro";
 
 const CreatePost: NextPage = () => {
 
-
   const onSubmit = (data: object) => console.log(data);
   const inputData = [
     {
@@ -24,10 +23,12 @@ const CreatePost: NextPage = () => {
   ];
 
   return (
-    <Container>
-      <H1>Create Post</H1>
-      <Form submitText="Post" inputs={inputData} onSubmit={onSubmit} />
-    </Container>
+     (
+      <Container>
+        <H1>Create Post</H1>
+        <Form submitText="Post" inputs={inputData} onSubmit={onSubmit} />
+      </Container>
+    )
   );
 };
 
