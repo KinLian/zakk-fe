@@ -1,3 +1,2 @@
-export * from './endpoint'
+export * from './api'
 export * from './token'
-export * from './logic'

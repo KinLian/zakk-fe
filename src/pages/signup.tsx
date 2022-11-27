@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import tw from "twin.macro";
 import Link from "next/link";
-import { signup } from "@/service";
 import { Form } from "@/components/Form";
 import { Container, H1 } from "@/styles/base";
 
 const SignUp: NextPage = () => {
   const onSubmit = async (data: object) => {
-    await signup(data);
+    console.log(data);
   };
 
   const inputData = [

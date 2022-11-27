@@ -1,5 +1,4 @@
 import { Form } from "@/components/Form";
-import { login } from "@/service";
 import { Container, H1 } from "@/styles/base";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,7 +8,7 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data: object) => {
-    const isLoggedIn = await login(data);
+    const isLoggedIn = true;
     isLoggedIn ? router.replace("/") : null;
   };
 
