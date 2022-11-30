@@ -18,6 +18,6 @@ baseAxios.interceptors.request.use((config) => {
 })
 
 
-export const signUpAPI = (data: object) => baseAxios.post("users/register", data)
+export const signUp = (data: object) => baseAxios.post("users/register", data)
 export const fetchToken = (data: object) => baseAxios.post("users/login", data)
 export const getUser = () => baseAxios.get("users")
