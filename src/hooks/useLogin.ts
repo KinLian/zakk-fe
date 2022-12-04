@@ -1,11 +1,11 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginSchema } from '@/validations';
-import { z } from 'zod';
 import { api } from '@/libs';
+import { LoginSchema } from '@/validations';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { setCookie } from 'nookies';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { z } from 'zod';
 
 type Data = z.infer<typeof LoginSchema>;
 
@@ -26,11 +26,12 @@ export const useLogin = () => {
       });
 
       toast.success('Logged in!', { id: toastId });
-      window.location.replace('/');
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 1000);
     } catch (err) {
       toast.error('Invalid credentials', { id: toastId });
     } finally {
-      toast.dismiss(toastId);
       setLoading(false);
     }
   };

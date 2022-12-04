@@ -8,11 +8,10 @@ import {
   Loading,
 } from '@nextui-org/react';
 import { UseFormRegister } from 'react-hook-form';
-import { LoginData, SignupData } from '@/validations';
 
 type AuthFormProps = {
   isLogin?: boolean;
-  register: UseFormRegister<LoginData | SignupData>;
+  register: UseFormRegister<any>;
   onSubmit: (e: BaseSyntheticEvent<object, any, any> | undefined) => unknown;
   loading?: boolean;
 };
@@ -53,8 +52,8 @@ export const AuthForm: FC<AuthFormProps> = ({
             width="100%"
             clearable
             underlined
-            labelPlaceholder="Name"
-            {...register('name')}
+            labelPlaceholder="Username"
+            {...register('username')}
           />
           <Spacer y={2.5} />
         </>
