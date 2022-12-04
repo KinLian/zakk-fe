@@ -1,8 +1,16 @@
-import { useRichEditor } from '@/hooks';
-import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
+import { useCreatePost, useRichEditor } from '@/hooks';
+import {
+  Container,
+  Text,
+  Input,
+  Button,
+  Spacer,
+  Loading,
+} from '@nextui-org/react';
 
 export const CreatePostForm = () => {
   const { editor, markup } = useRichEditor();
+  const { title, changeTitle, createPost, loading } = useCreatePost();
 
   return (
     <Container
@@ -14,11 +22,22 @@ export const CreatePostForm = () => {
         margin: 'auto',
         maxWidth: '1000px',
       }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        createPost(title, markup.__html);
+      }}
     >
       <>
         <Text h1>Create a Post</Text>
         <Spacer y={2} />
-        <Input clearable underlined labelPlaceholder="Title" width="100%" />
+        <Input
+          clearable
+          underlined
+          labelPlaceholder="Title"
+          width="100%"
+          value={title}
+          onChange={(e) => changeTitle(e.target.value)}
+        />
         <Spacer y={2} />
         {editor}
         <Spacer y={2} />
@@ -41,8 +60,8 @@ export const CreatePostForm = () => {
             padding: '0',
           }}
         >
-          <Button type="submit" color="primary">
-            Create Post
+          <Button type="submit" color="primary" disabled={loading}>
+            {loading ? <Loading size="sm" /> : 'Create Post'}
           </Button>
         </Container>
       </>

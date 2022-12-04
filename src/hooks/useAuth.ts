@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 export const useAuth = () => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -19,15 +20,17 @@ export const useAuth = () => {
         });
         setUser(data.user);
         setIsLogin(true);
+        setToken(zakk);
       } catch {
         destroyCookie(null, 'zakk');
         setUser(null);
         setIsLogin(false);
+        setToken(null);
       }
     };
 
     zakk && getCurrentUser();
   }, []);
 
-  return { user, isLogin };
+  return { user, isLogin, token };
 };
