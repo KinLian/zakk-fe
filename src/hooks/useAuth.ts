@@ -17,7 +17,7 @@ export const useAuth = () => {
             Authorization: `Bearer ${zakk}`,
           },
         });
-        setUser(data);
+        setUser(data.user);
         setIsLogin(true);
       } catch {
         destroyCookie(null, 'zakk');
