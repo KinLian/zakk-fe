@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const darkTheme = createTheme({
   type: 'dark',
