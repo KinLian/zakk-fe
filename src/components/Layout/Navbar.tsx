@@ -9,6 +9,7 @@ export const Navbar: FC = () => {
   const router = useRouter();
   const goLogin = () => router.push('/login');
   const goSignup = () => router.push('/signup');
+  const goCretePost = () => router.push('/create-post');
   const logout = () => {
     destroyCookie(null, 'zakk');
     window.location.reload();
@@ -25,19 +26,24 @@ export const Navbar: FC = () => {
             auto
             flat
             animated
-            color={isLogin ? 'error' : 'primary'}
-            onClick={isLogin ? logout : goLogin}
+            color={isLogin ? 'gradient' : 'primary'}
+            onClick={isLogin ? goCretePost : goLogin}
           >
-            {isLogin ? 'Logout' : 'Login'}
+            {isLogin ? 'Create Post' : 'Login'}
           </Button>
         </N.Item>
-        {!isLogin && (
-          <N.Item>
-            <Button auto flat animated color="success" onClick={goSignup}>
-              Sign Up
-            </Button>
-          </N.Item>
-        )}
+
+        <N.Item>
+          <Button
+            auto
+            flat
+            animated
+            color={isLogin ? 'error' : 'success'}
+            onClick={isLogin ? logout : goSignup}
+          >
+            {isLogin ? 'Logout' : 'Sign Up'}
+          </Button>
+        </N.Item>
       </N.Content>
     </N>
   );

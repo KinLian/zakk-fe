@@ -35,10 +35,10 @@ export const useCreatePost = () => {
         }
       )
       .then(() => {
+        setLoading(false);
         setTimeout(() => {
           window.location.replace('/');
-          setLoading(false);
-        }, 1000);
+        }, 2000);
       })
       .catch(() => setLoading(false));
   };
