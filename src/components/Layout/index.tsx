@@ -11,6 +11,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => (
     css={{
       maxW: '100%',
       minHeight: '100vh',
+      paddingBottom: '2rem',
     }}
   >
     <Navbar />

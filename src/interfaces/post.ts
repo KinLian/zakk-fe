@@ -1,3 +1,5 @@
+import { IComment } from './comment';
+
 export interface IPost {
   id: string;
   title: string;
@@ -13,16 +15,4 @@ export interface IPost {
 
 export interface IPostDetail extends IPost {
   comments: IComment[];
-}
-
-export interface IComment {
-  id: string;
-  content: string;
-  created_at: string;
-  updated_at: string;
-  commenter: {
-    id: string;
-    name: string;
-    email: string;
-  };
 }

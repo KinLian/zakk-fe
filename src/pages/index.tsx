@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { useAuth } from '@/hooks';
 import { Container, Text } from '@nextui-org/react';
 import { AllPosts } from '@/components/Post';
 
