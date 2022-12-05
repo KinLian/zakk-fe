@@ -1,5 +1,6 @@
 import { IPost } from "@/interfaces";
 import { api } from "@/libs";
+import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import { useAuth } from "./useAuth";
 
@@ -7,20 +8,21 @@ export const usePost = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<IPost[]>();
-  const { token } = useAuth();
 
 
   useEffect(() => {
+    const { zakk } = parseCookies();
 
     const fetchPost = async () => {
       try {
         const { data } = await api.get('/posts/', {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${zakk}`,
           },
         });
-        setPosts(data.ok);
-      } catch {
+        setPosts(data.data);
+      } catch (error) {
+        console.log(error)
         setError(true);
       }
 

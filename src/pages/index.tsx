@@ -2,14 +2,7 @@ import type { NextPage } from "next";
 import { Posts } from "@/components/Post";
 
 const Home: NextPage = () => {
-
-  return (
-    <div>
-      <pre>
-        <Posts />
-      </pre>
-    </div>
-  );
+  return <Posts />;
 };
 
 export default Home;

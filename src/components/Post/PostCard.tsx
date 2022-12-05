@@ -47,7 +47,7 @@ export const PostCard: FC<PostCardprops> = ({
       </Card.Header>
       <Card.Divider />
       <Card.Body css={{ p: "2em" }}>
-        <Text>{content}</Text>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
       </Card.Body>
       <Card.Divider />
       <Card.Footer css={{ gap: "1em" }}>
@@ -57,10 +57,12 @@ export const PostCard: FC<PostCardprops> = ({
         <Button auto color={"error"}>
           <Text> {dislike} Dislikes</Text>
         </Button>
-        <Button auto>
-          {" "}
-          <Text> {totalComment} Comments </Text>
-        </Button>
+        {totalComment >= 0 && (
+          <Button auto>
+            {" "}
+            <Text> {totalComment} Comments </Text>
+          </Button>
+        )}
       </Card.Footer>
     </Card>
   );

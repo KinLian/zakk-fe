@@ -1,6 +1,6 @@
 import { usePost } from "@/hooks/usePosts";
 import { FC } from "react";
-import { Container, Loading } from "@nextui-org/react";
+import { Container, Loading,Text } from "@nextui-org/react";
 import { EmptyPost } from "../EmptyContent";
 import { PostCard } from "./PostCard";
 
@@ -25,9 +25,10 @@ export const Posts: FC = () => {
     <Container
       css={{ w: "75%", display: "flex", flexDirection: "column", gap: "2em" }}
     >
+    <Text b css={{fontSize:  "2em"}}>All Posts</Text>
       {posts!.map((post) => (
         <PostCard
-          totalComment={0}
+          totalComment={post.comments?.length}
           posterName={post.poster.name}
           key={post.id}
           {...post}

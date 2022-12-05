@@ -3,10 +3,18 @@ import { IPost } from "@/interfaces";
 import { api } from "@/libs";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
-  const response = await api.get(`post/${query.id}`);
+  const { zakk } = parseCookies();
+  console.log(zakk);
+  const response = await api.get(`posts/${query.id}`, {
+    headers: {
+      Authorization: `Bearer ${zakk}`,
+    },
+  });
+
 
   return { props: { data: response.data.data } };
 };
