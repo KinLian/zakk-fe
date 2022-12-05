@@ -1,32 +1,44 @@
 import { PostDetail } from "@/components/Post";
 import { IPost } from "@/interfaces";
 import { api } from "@/libs";
+import { Container, Loading } from "@nextui-org/react";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
-import { parseCookies } from "nookies";
+import { useEffect, useState } from "react";
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { query } = ctx;
-  const { zakk } = parseCookies();
-  console.log(zakk);
-  const response = await api.get(`posts/${query.id}`, {
-    headers: {
-      Authorization: `Bearer ${zakk}`,
-    },
-  });
+const PostDetailPage: NextPage = () => {
+  const [data, setData] = useState<IPost>();
+  const [commentsLength, setCommentsLength] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
+  useEffect(() => {
+    if (router.isReady) {
+      const id = router.query.id;
+      api
+        .get(`/posts/${id}`)
+        .then((data) => {
+          setData(data.data.data);
+          setCommentsLength(data.data.data.comments.length);
+        })
+        .then(() => setIsLoading(false));
+    }
+  }, [router.isReady]);
 
-  return { props: { data: response.data.data } };
-};
-
-type PostDetailProps = {
-  data: IPost;
-};
-
-const PostDetailPage: NextPage<PostDetailProps> = ({ data }) => {
-  return (
+  return isLoading ? (
+    <Container
+      css={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        h: "100vh",
+      }}
+    >
+      <Loading size="xl">Please Wait</Loading>
+    </Container>
+  ) : (
     <PostDetail
-      totalComment={data.comments.length}
+      totalComment={commentsLength}
       posterName={data.poster.name}
       {...data}
     />
