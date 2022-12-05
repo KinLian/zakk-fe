@@ -24,12 +24,15 @@ a {
 .wrapper-class {
   padding: 1rem;
   border: 1px solid #ccc;
+  width: 100%;
 }
 .editor-class {
   background-color: white;
   padding: 1rem;
   border: 1px solid #ccc;
   color: #000;
+  width: inherit;
+  height: auto;
 }
 .toolbar-class {
   border: 1px solid #ccc;

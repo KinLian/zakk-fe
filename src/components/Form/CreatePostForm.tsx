@@ -47,6 +47,9 @@ export const CreatePostForm = () => {
             marginTop: '1rem',
             border: '1px solid #ccc',
             padding: '1rem',
+            maxWidth: '100%',
+            overflowWrap: 'break-word',
+            height: 'auto',
           }}
           dangerouslySetInnerHTML={markup}
         ></Container>
