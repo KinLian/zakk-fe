@@ -26,7 +26,7 @@ export const Navbar: FC = () => {
             auto
             flat
             animated
-            color={isLogin ? 'gradient' : 'primary'}
+            color="primary"
             onClick={isLogin ? goCretePost : goLogin}
           >
             {isLogin ? 'Create Post' : 'Login'}

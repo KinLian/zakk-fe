@@ -1,10 +1,6 @@
-import dynamic from 'next/dynamic';
-
-// import DOMPurify from 'dompurify';
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import { useCallback, useEffect, useState } from 'react';
-// const DOMPurify = dynamic(() => import('dompurify'), { ssr: false });
 import DOMPurify from 'isomorphic-dompurify';
 
 export const useRichEditor = () => {
