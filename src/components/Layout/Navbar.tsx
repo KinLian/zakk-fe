@@ -1,60 +1,50 @@
-import { getToken } from "@/service";
-import { useEffect, useState } from "react";
-import tw from "twin.macro";
-import { useRouter } from "next/router";
-import { Button } from "../Button";
-import { GrAdd } from "react-icons/gr";
-import * as S from "./Navbar.style";
+import { FC } from 'react';
+import { Navbar as N, Button } from '@nextui-org/react';
+import { useRouter } from 'next/router';
+import { destroyCookie } from 'nookies';
+import { useAuth } from '@/hooks';
 
-export const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export const Navbar: FC = () => {
+  const { isLogin } = useAuth();
   const router = useRouter();
-
-  const onClickLoggedIn = () => {
-    !isLoggedIn ? router.push("/login") : setIsLoggedIn(false);
+  const goLogin = () => router.push('/login');
+  const goSignup = () => router.push('/signup');
+  const goCretePost = () => router.push('/create-post');
+  const logout = () => {
+    destroyCookie(null, 'zakk');
+    window.location.reload();
   };
 
-  const onClickSignUp = () => router.push("/signup");
-  const onHeaderClicked = () => router.push("/posts");
-  const onAddPostClicked = () => router.push("/posts/create");
-
-  useEffect(() => {
-    getToken() && setIsLoggedIn(true);
-  }, []);
-
   return (
-    <S.Container>
-      <S.Logo onClick={onHeaderClicked}>Forum</S.Logo>
-      {router.asPath !== "/login" && router.asPath !== "/signup" && (
-        <S.ButtonContainer>
+    <N variant="static">
+      <N.Content>
+        <N.Link href="/">Home</N.Link>
+      </N.Content>
+      <N.Content>
+        <N.Item>
           <Button
-            color="black"
-            backgroundColor="#FFADBC"
-            onClick={onClickLoggedIn}
+            auto
+            flat
+            animated
+            color="primary"
+            onClick={isLogin ? goCretePost : goLogin}
           >
-            {isLoggedIn ? "Logout" : "Login"}
+            {isLogin ? 'Create Post' : 'Login'}
           </Button>
-          {isLoggedIn && (
-            <Button
-              onClick={onAddPostClicked}
-              tw="bg-white"
-              icon={<GrAdd />}
-              color="black"
-            >
-              Add Post
-            </Button>
-          )}
-          {!isLoggedIn && (
-            <Button
-              color="black"
-              backgroundColor="white"
-              onClick={onClickSignUp}
-            >
-              Sign Up
-            </Button>
-          )}
-        </S.ButtonContainer>
-      )}
-    </S.Container>
+        </N.Item>
+
+        <N.Item>
+          <Button
+            auto
+            flat
+            animated
+            color={isLogin ? 'error' : 'success'}
+            onClick={isLogin ? logout : goSignup}
+          >
+            {isLogin ? 'Logout' : 'Sign Up'}
+          </Button>
+        </N.Item>
+      </N.Content>
+    </N>
   );
 };

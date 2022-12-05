@@ -1,54 +1,9 @@
-import { NextPage } from "next";
-import tw from "twin.macro";
-import Link from "next/link";
-import { Form } from "@/components/Form";
-import { Container, H1 } from "@/styles/base";
+import { FC } from 'react';
+import { SignupForm } from '@/components/Form';
+import { GetServerSideProps } from 'next';
+import { redirectAuthenticated } from '@/guards';
 
-const SignUp: NextPage = () => {
-  const onSubmit = async (data: object) => {
-    console.log(data);
-  };
+const SignupPage: FC = () => <SignupForm />;
 
-  const inputData = [
-    {
-      label: "Email",
-      id: "email",
-      type: "email",
-      placeholder: "john@doe.com",
-      validation: { required: "Please fill the email" },
-    },
-    {
-      label: "Name",
-      id: "name",
-      type: "text",
-      placeholder: "John Doe",
-      validation: { required: "Please fill the name" },
-    },
-    {
-      label: "Username",
-      id: "username",
-      type: "text",
-      placeholder: "johndoe",
-      validation: { required: "Please fill the username" },
-    },
-    {
-      label: "Password",
-      id: "password",
-      type: "password",
-      placeholder: "secret password",
-      validation: { required: "Please fill the password" },
-    },
-  ];
-
-  return (
-    <Container>
-      <H1>Sign Up</H1>
-      <Form inputs={inputData} onSubmit={onSubmit} submitText={"Sign Up"} />
-      <p tw="mt-5">
-        {"Already have an account?"} <Link href={"/login"}>Login</Link>
-      </p>
-    </Container>
-  );
-};
-
-export default SignUp;
+export const getServerSideProps: GetServerSideProps = redirectAuthenticated;
+export default SignupPage;
