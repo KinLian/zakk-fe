@@ -1,35 +1,56 @@
+import { IComment, IUser } from "@/interfaces";
+import { Container } from "@nextui-org/react";
 import { FC } from "react";
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import { Button } from "../Button";
-import tw from "twin.macro";
+import { Button, Text } from "@nextui-org/react";
 
-interface CommentProps {
+export type commentType = {
+  id: string;
   content: string;
-  dislike: number;
   like: number;
-  postId: number;
-  commenterUsername: string;
-  postDate: string;
-}
+  dislike: number;
+  commenter: IUser;
+};
 
-export const Comment: FC<CommentProps> = ({
+export const Comment: FC<commentType> = ({
+  id,
   content,
-  dislike,
   like,
-  commenterUsername,
-  postDate,
+  dislike,
+  commenter,
 }) => {
+
   return (
-    <>
-      <div tw="flex gap-2">
-        <p tw="font-medium">{commenterUsername}</p>
-        <p>{postDate} ago</p>
-      </div>
-      <>{content}</>
-      <div tw="flex">
-        <Button icon={<AiOutlineArrowUp />}> {like - dislike} </Button>
-        <Button icon={<AiOutlineArrowDown />} />
-      </div>
-    </>
+    <Container
+      css={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.5em",
+        bg: "#4A5568",
+        px: "$12",
+        py: "$8",
+        borderRadius: "$sm",
+      }}
+    >
+      <Text css={{ fontWeight: "$bold", fontSize: "$xl" }}>
+        {commenter.name}
+      </Text>
+      <Text css={{ mt: "$1" }}>{content}</Text>
+      <Container
+        css={{
+          display: "flex",
+          gap: "0.5em",
+          py: "$8",
+          px: "$0",
+          borderRadius: "$sm",
+        }}
+      >
+        <Button auto color={"success"} css={{ w: "fit-content" }}>
+          {like} Likes
+        </Button>
+        <Button auto color={"error"} css={{ w: "fit-content" }}>
+          {dislike} Dislikes
+        </Button>
+      </Container>
+    </Container>
   );
 };
