@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth";
 
 export const usePost = () => {
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<IPost[]>();
   const { token } = useAuth();
 

@@ -1,9 +1,11 @@
-import { IComment } from ".";
+import { IComment, IUser } from ".";
 
 export interface IPost {
   id: number;
+  title: string;
   content: string;
-  like: string;
-  dislike : number;
-  comments : IComment[];
+  like: number;
+  dislike: number;
+  comments: IComment[];
+  poster: IUser;
 }

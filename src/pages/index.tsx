@@ -1,15 +1,13 @@
-import type { NextPage } from 'next';
-import { useState } from 'react';
-import tw from 'twin.macro';
-import { Button } from '@nextui-org/react';
-import { useAuth } from '@/hooks';
+import type { NextPage } from "next";
+import { Posts } from "@/components/Post";
 
 const Home: NextPage = () => {
-  const { user } = useAuth();
 
   return (
     <div>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
+      <pre>
+        <Posts />
+      </pre>
     </div>
   );
 };
