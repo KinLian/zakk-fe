@@ -10,6 +10,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => (
   <Box
     css={{
       maxW: '100%',
+      minHeight: '100vh',
     }}
   >
     <Navbar />

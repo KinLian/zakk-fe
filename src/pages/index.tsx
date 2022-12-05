@@ -1,16 +1,21 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
-import tw from 'twin.macro';
-import { Button } from '@nextui-org/react';
 import { useAuth } from '@/hooks';
+import { Container, Text } from '@nextui-org/react';
+import { AllPosts } from '@/components/Post';
 
 const Home: NextPage = () => {
-  const { user } = useAuth();
-
   return (
-    <div>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
-    </div>
+    <Container
+      css={{
+        maxWidth: '1000px',
+        margin: '1rem auto',
+      }}
+    >
+      <Text h1 css={{ marginBottom: '1rem' }}>
+        All Posts
+      </Text>
+      <AllPosts />
+    </Container>
   );
 };
 

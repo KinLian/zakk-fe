@@ -13,6 +13,10 @@ export const useCreatePost = () => {
   };
 
   const createPost = (title: string, content: string) => {
+    if (title.length < 3 || content.length < 3) {
+      return toast.error('Title or Content is too short');
+    }
+
     setLoading(true);
     toast
       .promise(
