@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Button, Card, Text } from "@nextui-org/react";
+import { useRouter } from "next/router";
 
 type PostCardprops = {
   id: number;
@@ -8,19 +9,29 @@ type PostCardprops = {
   totalComment: number;
   title: string;
   content: string;
-  posterEmail: string;
+  posterName: string;
+  isPressable?: boolean;
 };
 
 export const PostCard: FC<PostCardprops> = ({
+  id,
   title,
   content,
   like,
   dislike,
   totalComment,
-  posterEmail,
+  posterName,
+  isPressable = true,
 }) => {
+  const router = useRouter();
+
   return (
-    <Card isPressable>
+    <Card
+      isPressable={isPressable}
+      onClick={() => {
+        router.push(`/${id}`);
+      }}
+    >
       <Card.Header
         css={{
           display: "flex",
@@ -28,13 +39,11 @@ export const PostCard: FC<PostCardprops> = ({
           justifyContent: "space-between",
           w: "100%",
           p: "1em",
-          fontSize : "$lg"
+          fontSize: "$lg",
         }}
       >
-        <Text b>
-          {title}{" "}
-        </Text>
-        <Text>{posterEmail}</Text>
+        <Text b>{title} </Text>
+        <Text>{posterName}</Text>
       </Card.Header>
       <Card.Divider />
       <Card.Body css={{ p: "2em" }}>

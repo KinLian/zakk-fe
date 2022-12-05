@@ -28,7 +28,7 @@ export const Posts: FC = () => {
       {posts!.map((post) => (
         <PostCard
           totalComment={0}
-          posterEmail={post.poster.email}
+          posterName={post.poster.name}
           key={post.id}
           {...post}
         />
