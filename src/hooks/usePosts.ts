@@ -18,7 +18,6 @@ export const usePost = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         setPosts(data.ok);
       } catch {
         setError(true);
