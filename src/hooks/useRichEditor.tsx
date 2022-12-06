@@ -67,6 +67,7 @@ export const useRichEditor = (isDetail = false) => {
             )
           )
         );
+        setConvertedContent(data.data.content);
         setEditor(
           <Editor
             editorState={editorState}
