@@ -25,7 +25,7 @@ export const CardComment: FC<CardCommentProps> = ({
   const isMyComment = currentUserId && currentUserId === commenterId;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { deleteComment, loading } = useDeleteComment(id);
-
+  
   return !isUpdating ? (
     <Container
       css={{
