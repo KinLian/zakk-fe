@@ -1,17 +1,23 @@
-import { Container, Text } from "@nextui-org/react";
-import { FC } from "react";
+import { Container, Text } from '@nextui-org/react';
+import { FC } from 'react';
 
-export const EmptyPost: FC = () => {
+type EmptyPostProps = {
+  message?: string;
+};
+
+export const EmptyPost: FC<EmptyPostProps> = ({ message }) => {
   return (
     <Container
       css={{
-        h: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        h: 'calc(100vh - 200px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <Text b css={{fontSize:  "$lg"}}>No posts to show :(</Text>
+      <Text b css={{ fontSize: '$lg' }}>
+        {message ?? 'No posts to show :('}
+      </Text>
     </Container>
   );
 };

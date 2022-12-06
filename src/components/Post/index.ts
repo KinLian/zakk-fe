@@ -1,3 +1,2 @@
-export * from './PostDetail'
-export * from './Posts'
-export * from './PostCard'
+export * from './AllPosts';
+export * from './DetailPost';
