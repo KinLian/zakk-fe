@@ -10,14 +10,18 @@ type CardPostProps = {
     comments?: IComment[];
   };
   isDetail?: boolean;
+  currentUserId?: number;
 };
 
 export const CardPost: FC<CardPostProps> = ({
   post: { id, content, poster, created_at, title },
   isDetail = false,
+  currentUserId,
 }) => {
   const router = useRouter();
   const showedContent = isDetail ? content : content.slice(0, 200) + '...';
+  const isPoster = currentUserId && currentUserId === poster.id;
+  const detailAndPoster = isDetail && isPoster;
   return (
     <Container
       key={id}
@@ -60,19 +64,35 @@ export const CardPost: FC<CardPostProps> = ({
         />
       </div>
 
-      {!isDetail && (
-        <div
-          style={{
-            marginTop: '1rem',
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Button onClick={() => router.push(`/posts/${id}`)}>
-            Lihat Detail
-          </Button>
-        </div>
-      )}
+      <div
+        style={{
+          marginTop: '1rem',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <>
+          {!isDetail && (
+            <Button onClick={() => router.push(`/posts/${id}`)}>
+              Lihat Detail
+            </Button>
+          )}
+          {detailAndPoster && (
+            <>
+              <Button onClick={() => router.push(`/posts/update/${id}`)}>
+                Edit
+              </Button>
+              <Button
+                onClick={() => {}}
+                color="error"
+                css={{ marginLeft: '1rem' }}
+              >
+                Hapus
+              </Button>
+            </>
+          )}
+        </>
+      </div>
     </Container>
   );
 };

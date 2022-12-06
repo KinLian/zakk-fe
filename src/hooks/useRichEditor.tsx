@@ -1,9 +1,13 @@
 import { convertToHTML } from 'draft-convert';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { useCallback, useEffect, useState } from 'react';
 import DOMPurify from 'isomorphic-dompurify';
+import { useRouter } from 'next/router';
+import { api } from '@/libs';
 
-export const useRichEditor = () => {
+export const useRichEditor = (isDetail = false) => {
+  const router = useRouter();
+  const { id } = router.query;
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -50,6 +54,33 @@ export const useRichEditor = () => {
 
     importAndSetEditor();
   }, [editorState, handleEditorChange]);
+
+  useEffect(() => {
+    const getDetailPost = async () => {
+      try {
+        const { Editor } = await import('react-draft-wysiwyg');
+        const { data } = await api.get(`/posts/${id}`);
+        setEditorState(
+          EditorState.createWithContent(
+            ContentState.createFromBlockArray(
+              convertFromHTML(data.data.content).contentBlocks
+            )
+          )
+        );
+        setEditor(
+          <Editor
+            editorState={editorState}
+            onEditorStateChange={handleEditorChange}
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+          />
+        );
+      } catch {}
+    };
+
+    isDetail && router.isReady && getDetailPost();
+  }, [router.isReady, id]);
 
   return {
     editorState,

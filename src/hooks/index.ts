@@ -5,3 +5,4 @@ export * from './usePost';
 export * from './usePosts';
 export * from './useRichEditor';
 export * from './useSignup';
+export * from './useUpdatePost';

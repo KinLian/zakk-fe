@@ -6,7 +6,7 @@ export interface IComment {
   like: number;
   dislike: number;
   commenter: {
-    id: string;
+    id: number;
     name: string;
     email: string;
   };

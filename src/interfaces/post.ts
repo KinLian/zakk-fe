@@ -5,7 +5,7 @@ export interface IPost {
   title: string;
   content: string;
   poster: {
-    id: string;
+    id: number;
     name: string;
     email: string;
   };

@@ -1,8 +1,9 @@
 export const formatDate = (date: string | Date) => {
-  const newDate = new Date(date);
+  let newDate = new Date(date);
+  newDate.setHours(newDate.getHours() + 7);
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
-  const day = newDate.getDay() + 1;
+  const day = newDate.getDay();
   const hours = newDate.getHours();
   const minutes = newDate.getMinutes();
 
