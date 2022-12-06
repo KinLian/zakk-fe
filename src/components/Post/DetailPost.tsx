@@ -8,7 +8,6 @@ import { CardPost } from "./CardPost";
 export const DetailPost: FC = () => {
   const { post } = usePost();
   const { user } = useAuth();
-  console.log(post);
 
   return (
     <Container>

@@ -1,7 +1,11 @@
 import { IComment, IUser } from "@/interfaces";
-import { Container } from "@nextui-org/react";
-import { FC } from "react";
+import { Container, Row } from "@nextui-org/react";
+import { FC, useState } from "react";
 import { Button, Text } from "@nextui-org/react";
+import { boolean } from "zod";
+import { UpdateComment } from "./UpdateComment";
+import { useAuth } from "@/hooks";
+import { useUpdateComment } from "@/hooks/useUpdateComment";
 
 export type commentType = {
   id: string;
@@ -12,51 +16,58 @@ export type commentType = {
     name: string;
     id: number;
     email: string;
-  }
+  };
   updated_at: string;
   created_at: string;
 };
 
-export const Comment: FC<commentType> = ({
-  id,
-  content,
-  like,
-  dislike,
-  commenter,
-}) => {
+export const Comment: FC<commentType> = (props) => {
+  const { user } = useAuth();
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
-  return (
+  return !isUpdating ? (
     <Container
       css={{
         display: "flex",
         flexDirection: "column",
         gap: "0.5em",
-        border: '1px solid #ccc',
+        border: "1px solid #ccc",
         px: "$12",
         py: "$8",
         borderRadius: "$xs",
       }}
     >
       <Text css={{ fontWeight: "$bold", fontSize: "$xl" }}>
-        {commenter.name}
+        {props.commenter.name}
       </Text>
-      <Text css={{ mt: "$1" }}>{content}</Text>
+      <Text css={{ mt: "$1" }}>{props.content}</Text>
       <Container
         css={{
           display: "flex",
-          gap: "0.5em",
+          justifyContent: "flex-end",
           py: "$8",
           px: "$0",
           borderRadius: "$sm",
+          gap: "$8"
         }}
       >
-        <Button auto color={"success"} css={{ w: "fit-content" }}>
-          {like} Likes
-        </Button>
-        <Button auto color={"error"} css={{ w: "fit-content" }}>
-          {dislike} Dislikes
-        </Button>
+        {props.commenter.email === user?.email && (
+          <Button
+            auto
+            css={{ w: "fit-content" }}
+            onClick={() => setIsUpdating(true)}
+          >
+            Edit
+          </Button>
+        )}
+        {props.commenter.email === user?.email && (
+          <Button auto css={{ w: "fit-content" }} color="error" bordered>
+            Hapus
+          </Button>
+        )}
       </Container>
     </Container>
+  ) : (
+    <UpdateComment data={props} setIsUpdating={setIsUpdating} />
   );
 };
