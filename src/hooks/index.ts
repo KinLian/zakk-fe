@@ -5,5 +5,6 @@ export * from './usePost';
 export * from './usePosts';
 export * from './useRichEditor';
 export * from './useSignup';
+export * from "./useCreateComment";
 export * from './useUpdatePost';
 export * from './useDeletePost';

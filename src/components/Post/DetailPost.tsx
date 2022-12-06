@@ -1,7 +1,7 @@
 import { useAuth, usePost } from '@/hooks';
 import { Container } from '@nextui-org/react';
 import { FC } from 'react';
-import { AllComments } from '../Comment';
+import { AddComment, AllComments } from '../Comment';
 import { CardPost } from './CardPost';
 
 export const DetailPost: FC = () => {
@@ -18,6 +18,7 @@ export const DetailPost: FC = () => {
           titlePost={post.title}
         />
       )}
+      <AddComment />
     </Container>
   );
 };

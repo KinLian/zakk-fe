@@ -1,6 +1,7 @@
 export interface IComment {
   id: number;
   content: string;
+  title: string;
   created_at: string;
   updated_at: string;
   like: number;
