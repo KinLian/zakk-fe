@@ -1,13 +1,13 @@
-import { useDeletePost } from '@/hooks';
-import { IComment, IPostDetail } from '@/interfaces';
-import { formatDate } from '@/utils';
-import { Avatar, Button, Container, Loading, Text } from '@nextui-org/react';
-import DOMPurify from 'dompurify';
-import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { useDeletePost } from "@/hooks";
+import { IComment, IPostDetail } from "@/interfaces";
+import { formatDate } from "@/utils";
+import { Avatar, Button, Container, Loading, Text } from "@nextui-org/react";
+import DOMPurify from "dompurify";
+import { useRouter } from "next/router";
+import { FC } from "react";
 
 type CardPostProps = {
-  post: Omit<IPostDetail, 'comments'> & {
+  post: Omit<IPostDetail, "comments"> & {
     comments?: IComment[];
   };
   isDetail?: boolean;
@@ -20,7 +20,7 @@ export const CardPost: FC<CardPostProps> = ({
   currentUserId,
 }) => {
   const router = useRouter();
-  const showedContent = isDetail ? content : content.slice(0, 200) + '...';
+  const showedContent = isDetail ? content : content.slice(0, 200) + "...";
   const isPoster = currentUserId && currentUserId === poster.id;
   const detailAndPoster = isDetail && isPoster;
   const { deletePost, loading } = useDeletePost();
@@ -28,24 +28,24 @@ export const CardPost: FC<CardPostProps> = ({
     <Container
       key={id}
       css={{
-        border: '1px solid #ccc',
-        padding: '1rem',
-        marginBottom: '1rem',
-        borderRadius: '4px',
+        border: "1px solid #ccc",
+        padding: "1rem",
+        marginBottom: "1rem",
+        borderRadius: "4px",
       }}
     >
       <div
         style={{
-          display: 'flex',
+          display: "flex",
         }}
       >
         <Avatar text={poster.name} size="xl" />
         <div
           style={{
-            marginLeft: '1rem',
+            marginLeft: "1rem",
           }}
         >
-          <Text h3 css={{ marginBottom: '0px' }}>
+          <Text h3 css={{ marginBottom: "0px" }}>
             {title}
           </Text>
           <Text>
@@ -56,7 +56,7 @@ export const CardPost: FC<CardPostProps> = ({
 
       <div
         style={{
-          marginTop: '1rem',
+          marginTop: "1rem",
         }}
       >
         <div
@@ -68,9 +68,9 @@ export const CardPost: FC<CardPostProps> = ({
 
       <div
         style={{
-          marginTop: '1rem',
-          display: 'flex',
-          justifyContent: 'flex-end',
+          marginTop: "1rem",
+          display: "flex",
+          justifyContent: "flex-end",
         }}
       >
         <>
@@ -81,17 +81,26 @@ export const CardPost: FC<CardPostProps> = ({
           )}
           {detailAndPoster && (
             <>
-              <Button onClick={() => router.push(`/posts/update/${id}`)}>
+              <Button
+                auto
+                css={{ w: "fit-content" }}
+                onClick={() => router.push(`/posts/update/${id}`)}
+              >
                 Edit
               </Button>
               <Button
                 onClick={deletePost}
                 color="error"
-                css={{ marginLeft: '1rem' }}
+                auto
+                bordered
+                css={{ w: "fit-content", marginLeft: "$8" }}
               >
-                {loading ? <Loading size="sm" /> : 'Hapus'}
+                {loading ? <Loading size="sm" /> : "Delete"}
               </Button>
             </>
+          )}
+          {isDetail && (
+            <Button auto bordered css={{ w: "fit-content", marginLeft: "$8" }} onClick={() => router.push("#comment")}>Comment</Button>
           )}
         </>
       </div>

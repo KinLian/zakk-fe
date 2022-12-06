@@ -5,13 +5,11 @@ import { CardComment } from './CardComment';
 
 type AllCommentsProps = {
   comments: IComment[];
-  titlePost: string;
   currentUserId?: number;
 };
 
 export const AllComments: FC<AllCommentsProps> = ({
   comments,
-  titlePost,
   currentUserId,
 }) => {
   return (
@@ -24,7 +22,6 @@ export const AllComments: FC<AllCommentsProps> = ({
           {...commenter}
           {...rest}
           key={rest.id}
-          title={titlePost}
           commenterId={commenter.id}
           currentUserId={currentUserId}
         />

@@ -1,6 +1,8 @@
-import { formatDate } from '@/utils';
-import { Avatar, Button, Container, Text } from '@nextui-org/react';
-import { FC } from 'react';
+import { useDeleteComment } from "@/hooks/useDeleteComment";
+import { formatDate } from "@/utils";
+import { Avatar, Button, Container, Text } from "@nextui-org/react";
+import { FC, useState } from "react";
+import { UpdateComment } from "./UpdateComment";
 
 type CardCommentProps = {
   name: string;
@@ -13,46 +15,47 @@ type CardCommentProps = {
 };
 
 export const CardComment: FC<CardCommentProps> = ({
+  id,
   name,
   content,
   created_at,
-  title,
   commenterId,
   currentUserId,
 }) => {
   const isMyComment = currentUserId && currentUserId === commenterId;
-  return (
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const { deleteComment, loading } = useDeleteComment(id);
+  
+  return !isUpdating ? (
     <Container
       css={{
-        border: '1px solid #ccc',
-        padding: '1rem',
-        marginBottom: '1rem',
-        borderRadius: '4px',
+        border: "1px solid #ccc",
+        padding: "1rem",
+        marginBottom: "1rem",
+        borderRadius: "4px",
       }}
     >
       <div
         style={{
-          display: 'flex',
+          display: "flex",
         }}
       >
         <Avatar text={name} size="xl" />
         <div
           style={{
-            marginLeft: '1rem',
+            marginLeft: "1rem",
           }}
         >
-          <Text h3 css={{ marginBottom: '0px', fontWeight: 700 }}>
-            Re: {title}
+          <Text h3 css={{ marginBottom: "0px", fontWeight: 700 }}>
+            {name}
           </Text>
-          <Text>
-            by {name} - {formatDate(created_at)}
-          </Text>
+          <Text>{formatDate(created_at)}</Text>
         </div>
       </div>
 
       <Text
         css={{
-          marginTop: '1rem',
+          marginTop: "1rem",
         }}
       >
         {content}
@@ -60,20 +63,20 @@ export const CardComment: FC<CardCommentProps> = ({
 
       <div
         style={{
-          marginTop: '1rem',
-          display: 'flex',
-          justifyContent: 'flex-end',
+          marginTop: "1rem",
+          display: "flex",
+          justifyContent: "flex-end",
         }}
       >
         {isMyComment && (
           <>
-            <Button flat auto animated onClick={() => {}}>
+            <Button flat auto animated onClick={() => setIsUpdating(true)}>
               Edit
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => deleteComment()}
               color="error"
-              css={{ marginLeft: '1rem' }}
+              css={{ marginLeft: "1rem" }}
               flat
               animated
               auto
@@ -85,5 +88,10 @@ export const CardComment: FC<CardCommentProps> = ({
         )}
       </div>
     </Container>
+  ) : (
+    <UpdateComment
+      data={{ content: content, commenterId: commenterId, id: id }}
+      setIsUpdating={setIsUpdating}
+    />
   );
 };
