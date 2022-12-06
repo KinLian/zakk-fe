@@ -9,6 +9,7 @@ export const Loader: FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         margin: 'auto',
+        h: "70vh"
       }}
     >
       <Loading size="xl" />
