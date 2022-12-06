@@ -30,7 +30,9 @@ export const protectUpdatePost: GetServerSideProps = async (ctx) => {
       user = res.data.user;
     })
     .catch(() => {
-      nookies.destroy(ctx, 'zakk');
+      nookies.destroy(ctx, 'zakk', {
+        path: '/',
+      });
     });
 
   if (!isValidToken) {

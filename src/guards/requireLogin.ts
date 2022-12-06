@@ -25,7 +25,9 @@ export const requireLogin: GetServerSideProps = async (ctx) => {
       isValidToken = true;
     })
     .catch(() => {
-      nookies.destroy(ctx, 'zakk');
+      nookies.destroy(ctx, 'zakk', {
+        path: '/',
+      });
     });
 
   if (!isValidToken) {
