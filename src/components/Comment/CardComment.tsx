@@ -1,3 +1,4 @@
+import { useDeleteComment } from "@/hooks/useDeleteComment";
 import { formatDate } from "@/utils";
 import { Avatar, Button, Container, Text } from "@nextui-org/react";
 import { FC, useState } from "react";
@@ -23,6 +24,8 @@ export const CardComment: FC<CardCommentProps> = ({
 }) => {
   const isMyComment = currentUserId && currentUserId === commenterId;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const { deleteComment, loading } = useDeleteComment(id);
+
   return !isUpdating ? (
     <Container
       css={{
@@ -71,7 +74,7 @@ export const CardComment: FC<CardCommentProps> = ({
               Edit
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => deleteComment()}
               color="error"
               css={{ marginLeft: "1rem" }}
               flat
