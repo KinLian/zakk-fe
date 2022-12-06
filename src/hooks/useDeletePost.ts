@@ -1,6 +1,6 @@
 import { api } from '@/libs';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from './useAuth';
 
@@ -14,14 +14,11 @@ export const useDeletePost = () => {
     setLoading(true);
     toast
       .promise(
-        api.delete(
-          `/posts/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        ),
+        api.delete(`/posts/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
         {
           loading: 'Deleting post...',
           error: 'Failed to delete post',
@@ -31,8 +28,8 @@ export const useDeletePost = () => {
       .then(() => {
         setLoading(false);
         setTimeout(() => {
-          window.location.replace(`/posts/${id}`);
-        }, 2000);
+          window.location.replace(`/`);
+        }, 1500);
       })
       .catch(() => setLoading(false));
   };
@@ -40,6 +37,5 @@ export const useDeletePost = () => {
   return {
     deletePost,
     loading,
-    onSubmit: deletePost,
   };
 };
