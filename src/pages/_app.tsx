@@ -5,6 +5,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Layout } from '@/components/Layout';
 import { Toaster } from 'react-hot-toast';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { AuthProvider } from '@/contexts';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -20,10 +21,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       }}
     >
       <NextUIProvider theme={darkTheme}>
-        <Toaster />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AuthProvider>
+          <Toaster />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthProvider>
       </NextUIProvider>
     </NextThemesProvider>
   );
