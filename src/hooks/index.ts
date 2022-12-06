@@ -7,3 +7,4 @@ export * from './useRichEditor';
 export * from './useSignup';
 export * from "./useCreateComment";
 export * from './useUpdatePost';
+export * from './useDeletePost';

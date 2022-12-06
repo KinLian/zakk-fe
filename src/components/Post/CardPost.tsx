@@ -1,6 +1,7 @@
+import { useDeletePost } from '@/hooks';
 import { IComment, IPostDetail } from '@/interfaces';
 import { formatDate } from '@/utils';
-import { Avatar, Button, Container, Text } from '@nextui-org/react';
+import { Avatar, Button, Container, Loading, Text } from '@nextui-org/react';
 import DOMPurify from 'dompurify';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
@@ -22,6 +23,7 @@ export const CardPost: FC<CardPostProps> = ({
   const showedContent = isDetail ? content : content.slice(0, 200) + '...';
   const isPoster = currentUserId && currentUserId === poster.id;
   const detailAndPoster = isDetail && isPoster;
+  const { deletePost, loading } = useDeletePost();
   return (
     <Container
       key={id}
@@ -83,11 +85,11 @@ export const CardPost: FC<CardPostProps> = ({
                 Edit
               </Button>
               <Button
-                onClick={() => {}}
+                onClick={deletePost}
                 color="error"
                 css={{ marginLeft: '1rem' }}
               >
-                Hapus
+                {loading ? <Loading size="sm" /> : 'Hapus'}
               </Button>
             </>
           )}
