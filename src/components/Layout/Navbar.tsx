@@ -9,7 +9,7 @@ export const Navbar: FC = () => {
   const router = useRouter();
   const goLogin = () => router.push('/login');
   const goSignup = () => router.push('/signup');
-  const goCretePost = () => router.push('/create-post');
+  const goCretePost = () => router.push('/posts/create');
   const logout = () => {
     destroyCookie(null, 'zakk');
     window.location.reload();

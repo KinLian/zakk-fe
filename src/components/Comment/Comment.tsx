@@ -8,7 +8,13 @@ export type commentType = {
   content: string;
   like: number;
   dislike: number;
-  commenter: IUser;
+  commenter: {
+    name: string;
+    id: number;
+    email: string;
+  }
+  updated_at: string;
+  created_at: string;
 };
 
 export const Comment: FC<commentType> = ({
@@ -25,10 +31,10 @@ export const Comment: FC<commentType> = ({
         display: "flex",
         flexDirection: "column",
         gap: "0.5em",
-        bg: "#4A5568",
+        border: '1px solid #ccc',
         px: "$12",
         py: "$8",
-        borderRadius: "$sm",
+        borderRadius: "$xs",
       }}
     >
       <Text css={{ fontWeight: "$bold", fontSize: "$xl" }}>

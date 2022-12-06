@@ -18,6 +18,7 @@ export const useCreateComment = () => {
 
   const createComment = () => {
     setLoading(true);
+    if (content == "" || content == undefined) return;
     toast
       .promise(
         api.post(

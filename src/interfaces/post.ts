@@ -1,11 +1,18 @@
-import { IComment, IUser } from ".";
+import { IComment } from './comment';
 
 export interface IPost {
-  id: number;
+  id: string;
   title: string;
   content: string;
-  like: number;
-  dislike: number;
+  poster: {
+    id: number;
+    name: string;
+    email: string;
+  };
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IPostDetail extends IPost {
   comments: IComment[];
-  poster: IUser;
 }

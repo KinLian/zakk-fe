@@ -52,6 +52,14 @@ export const AuthForm: FC<AuthFormProps> = ({
             width="100%"
             clearable
             underlined
+            labelPlaceholder="Name"
+            {...register('name')}
+          />
+          <Spacer y={2.5} />
+          <Input
+            width="100%"
+            clearable
+            underlined
             labelPlaceholder="Username"
             {...register('username')}
           />

@@ -1,38 +1,27 @@
-import { IPost } from "@/interfaces";
-import { api } from "@/libs";
-import { parseCookies } from "nookies";
-import { useEffect, useState } from "react";
-import { useAuth } from "./useAuth";
+import { IPost } from '@/interfaces';
+import { api } from '@/libs';
+import { useEffect, useState } from 'react';
 
-export const usePost = () => {
+export const usePosts = () => {
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [posts, setPosts] = useState<IPost[]>();
 
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const { data } = await api.get('/posts');
+      setPosts(data.data);
+    } catch (err) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const { zakk } = parseCookies();
+    fetchPosts();
+  }, []);
 
-    const fetchPost = async () => {
-      try {
-        const { data } = await api.get('/posts/', {
-          headers: {
-            Authorization: `Bearer ${zakk}`,
-          },
-        });
-        setPosts(data.data);
-      } catch (error) {
-        console.log(error)
-        setError(true);
-      }
-
-      finally {
-        setLoading(false);
-      }
-    }
-
-    fetchPost();
-  })
-
-  return { loading, posts, error };
-}
+  return { posts, loading, error };
+};

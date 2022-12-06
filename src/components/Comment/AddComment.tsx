@@ -5,7 +5,7 @@ import { Button, Textarea, Text } from "@nextui-org/react";
 import { useCreateComment } from "@/hooks/useCreateComment";
 
 export const AddComment: FC = () => {
-  const { comment, changeComment, createComment, loading } = useCreateComment();
+  const { content, changeComment, createComment, loading } = useCreateComment();
 
   return (
     <Container
@@ -21,7 +21,7 @@ export const AddComment: FC = () => {
       <Textarea
         placeholder="Add comment"
         minRows={5}
-        value={comment}
+        value={content}
         onChange={(e) => changeComment(e.target.value)}
         css={{ w: "100%", h: "$32" }}
       />

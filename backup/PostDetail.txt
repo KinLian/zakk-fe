@@ -19,7 +19,7 @@ type PostDetailProps = {
 export const PostDetail: FC<PostDetailProps> = ({ comments, ...props }) => {
   return (
     <Container
-      css={{ w: "75%", display: "flex", flexDirection: "column", gap: "2em" }}
+      css={{ w: '75%', display: 'flex', flexDirection: 'column', gap: '2em' }}
     >
       <PostCard isPressable={false} {...props} />
       {/* the comments container */}
