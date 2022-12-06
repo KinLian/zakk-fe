@@ -11,7 +11,9 @@ export const Navbar: FC = () => {
   const goSignup = () => router.push('/signup');
   const goCretePost = () => router.push('/posts/create');
   const logout = () => {
-    destroyCookie(null, 'zakk');
+    destroyCookie(null, 'zakk', {
+      path: '/',
+    });
     window.location.reload();
   };
 
