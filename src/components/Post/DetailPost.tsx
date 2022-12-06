@@ -15,7 +15,6 @@ export const DetailPost: FC = () => {
         <AllComments
           comments={post.comments}
           currentUserId={user?.id}
-          titlePost={post.title}
         />
       )}
       <AddComment />

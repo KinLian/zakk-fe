@@ -4,10 +4,13 @@ import { FC } from "react";
 import { Button, Textarea, Text } from "@nextui-org/react";
 import { useCreateComment } from "@/hooks/useCreateComment";
 import { useUpdateComment } from "@/hooks/useUpdateComment";
-import { commentType } from "./Comment";
 
 export type updateComment = {
-  data: commentType;
+  data: {
+    content: string;
+    commenterId: number;
+    id: number;
+  }
   setIsUpdating: any;
 }
 
@@ -16,13 +19,13 @@ export const UpdateComment: FC<updateComment> = ({data, setIsUpdating}) => {
 
   return (
     <Container
-      id="comment"
       css={{
         display: "flex",
         flexDirection: "column",
         gap: "$8",
         w: "100%",
         px: "$0",
+        mb: "$8"
       }}
     >
       <Textarea

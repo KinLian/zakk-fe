@@ -1,18 +1,18 @@
 import { api } from "@/libs";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "./useAuth";
-import { useRouter } from "next/router";
-import { commentType } from "@/components/Comment/Comment";
 
 export type updateCommentData = {
-  data: commentType;
+  content: string;
+  commenterId: number;
+  id: number;
 };
 
-export const useUpdateComment = (data: commentType) => {
+export const useUpdateComment = (data: updateCommentData) => {
   const [content, setContent] = useState({
     content: data.content,
-    commenter_id: data.commenter.id,
+    commenter_id: data.commenterId,
   });
   const { token } = useAuth();
   const [loading, setLoading] = useState(false);
