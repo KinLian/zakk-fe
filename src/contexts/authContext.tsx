@@ -33,11 +33,15 @@ export const AuthProvider: FC<{ children?: ReactNode }> = ({ children }) => {
         setUser(data.user);
         setIsLogin(true);
         setToken(zakk);
-      } catch {
-        destroyCookie(null, 'zakk');
-        setUser(null);
-        setIsLogin(false);
-        setToken(null);
+      } catch (err: any) {
+        if (err?.message?.includes('401')) {
+          destroyCookie(null, 'zakk', {
+            path: '/',
+          });
+          setUser(null);
+          setIsLogin(false);
+          setToken(null);
+        }
       }
     };
 
